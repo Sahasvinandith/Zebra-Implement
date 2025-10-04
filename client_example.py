@@ -8,11 +8,14 @@ from typing import Iterator
 
 Opened_checkouts_queues = {}
 
-# def checkout_update(event):
-#     global Opened_checkouts_queues
-#     Opened_checkouts_queues[event["station_id"]] = event['data']
-#     print(f"Checkouts: {Opened_checkouts_queues}")
-
+def save_state():
+    """Saves the current global state to a JSON file."""
+    global Opened_checkouts_queues
+    try:
+        with open("queue_state.json", "w") as f:
+            json.dump(Opened_checkouts_queues, f, indent=4)
+    except Exception as e:
+        print(f"Error saving state to file: {e}")
 
 def checkout_update(event):
     global Opened_checkouts_queues
@@ -95,6 +98,7 @@ def checkout_update(event):
 
     # If no conditions were met
     print("STATUS: Queues are balanced and minimum stations are open. No action required.")
+    save_state()
 
 # def checkout_update(event):
 #     global Opened_checkouts_queues

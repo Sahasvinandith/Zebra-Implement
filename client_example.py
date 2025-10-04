@@ -19,7 +19,7 @@ def read_events(host: str, port: int) -> Iterator[dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Consume events from the replay server")
-    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--host", default="172.17.6.242")
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--limit", type=int, default=0, help="Stop after N events (0 = unlimited)")
     args = parser.parse_args()
